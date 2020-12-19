@@ -2,13 +2,15 @@ package sharkmcpe.walletapi;
 
 import cn.nukkit.event.Listener;
 import cn.nukkit.plugin.PluginBase;
+import sharkmcpe.walletapi.Api.WalletAPI;
 
 public class Wallet extends PluginBase implements Listener {
-    
-    static Wallet wallet = null;
-    
-    public static Mail getMe(){
-      return wallet;
+
+    public static Wallet wallet = null;
+    private WalletAPI api;
+
+    public static Wallet getMe(){
+        return wallet;
     }
     @Override
     public void onLoad(){
@@ -17,6 +19,11 @@ public class Wallet extends PluginBase implements Listener {
     @Override
     public void onEnable() {
         getLogger().info("สร้างโดย SharkMCPE");
+        this.api = new WalletAPI(this);
         getServer().getPluginManager().registerEvents(this, this);
+    }
+
+    public WalletAPI getWalletApi(){
+        return this.api;
     }
 }
